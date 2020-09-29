@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/maglev/cli/version'
+require_relative 'lib/maglev/cli'
 
 Gem::Specification.new do |spec|
   spec.name          = 'maglev-cli'
-  spec.version       = Maglev::Cli::VERSION
+  spec.version       = Maglev::CLI::VERSION
   spec.authors       = ['Rodrigo Alvarez']
   spec.email         = ['papipo@gmail.com']
 
@@ -26,4 +26,6 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.add_dependency 'thor', '1.0.1'
 end
