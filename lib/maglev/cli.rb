@@ -4,6 +4,7 @@ require 'thor'
 require 'bundler/cli'
 require_relative 'cli/model/find'
 require_relative 'cli/model/choose'
+require_relative 'cli/install_generator'
 
 module Maglev
   # The main CLI entrypoint
@@ -20,7 +21,7 @@ module Maglev
           'has_one_maglev_site'
         end
       end
-      Kernel.system('rails g maglev:install')
+      Maglev::CLI::InstallGenerator.start
       Kernel.system('rails maglev:install:migrations db:migrate')
     end
 
