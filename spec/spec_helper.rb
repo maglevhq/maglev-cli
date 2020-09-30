@@ -14,3 +14,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+ROOT_PATH  = File.join(File.dirname(__FILE__), '..')
+DUMMY_PATH = File.join(File.dirname(__FILE__), 'fixtures', 'dummy')
+TMP_PATH   = File.join(ROOT_PATH, 'tmp', 'dummy')
