@@ -8,8 +8,7 @@ RSpec.describe Maglev::CLI::Model::Find do
     Maglev::CLI::Model.new(args)
   end
 
-  let(:dummy_path) { File.join(File.dirname(__FILE__), '..', '..', '..', 'fixtures', 'dummy') }
-  subject { described_class.call(application_path: dummy_path) }
+  subject { described_class.call(application_path: DUMMY_PATH) }
 
   it do
     is_expected.to contain_exactly(
