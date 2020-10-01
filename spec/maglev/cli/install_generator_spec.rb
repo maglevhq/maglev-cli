@@ -39,4 +39,11 @@ RSpec.describe Maglev::CLI::InstallGenerator do
   it 'adds a catch-all route' do
     expect(routes_file).to include("get '(*path)', to: 'maglev/page_preview#index', defaults: { path: 'index' }")
   end
+
+  it 'copies maglev config' do
+    FileUtils.cmp(
+      File.join(described_class.source_root, 'config', 'maglev.rb'),
+      File.join(TMP_PATH, 'config', 'maglev.rb')
+    )
+  end
 end

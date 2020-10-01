@@ -28,6 +28,11 @@ module Maglev
           TEXT
         end
       end
+
+      desc 'Maglev config lives at config/maglev.rb'
+      def config
+        directory 'config'
+      end
     end
   end
 end
