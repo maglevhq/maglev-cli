@@ -18,7 +18,7 @@ module Maglev
       Bundler::CLI.start(%w[install])
       if (parent_model = ask_for_parent_model)
         inject_into_class(parent_model.path, parent_model.name) do
-          'has_one_maglev_site'
+          "  has_one_maglev_site\n"
         end
       end
       Maglev::CLI::InstallGenerator.start

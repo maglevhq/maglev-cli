@@ -12,10 +12,15 @@ RSpec.describe Maglev::CLI do
     before(:all) do
       FileUtils.remove_dir(TMP_PATH) if File.exist?(TMP_PATH)
       FileUtils.cp_r(DUMMY_PATH, TMP_PATH)
-      Dir.chdir(TMP_PATH)
     end
 
     after(:all) { FileUtils.remove_dir(TMP_PATH) if File.exist?(TMP_PATH) }
+
+    around do |example|
+      Dir.chdir(TMP_PATH) do
+        example.run
+      end
+    end
 
     let(:gemfile) { File.read(File.join(TMP_PATH, 'Gemfile')) }
     let(:user_model_file) { File.read(File.join(TMP_PATH, 'app', 'models', 'user.rb')) }
@@ -30,7 +35,13 @@ RSpec.describe Maglev::CLI do
       allow(Maglev::CLI::Model::Choose).to receive(:call).and_return(model)
       subject
       expect(gemfile).to include("gem 'maglev-rails-engine'")
-      expect(user_model_file).to include('has_one_maglev_site')
+      expect(user_model_file).to include(
+        <<~MODEL
+          class User < ApplicationRecord
+            has_one_maglev_site
+          end
+        MODEL
+      )
     end
   end
 end
