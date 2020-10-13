@@ -3,6 +3,6 @@
 Maglev.configure do |config|
   # config.logo = 'logo.png'
   # config.favicon = 'favicon.ico'
-  # config.primary_color = '#2F4F4F'
+  # config.primary_color = '#7362D0'
   # config.current_site = -> { current_user.maglev_site }
 end
