@@ -5,6 +5,7 @@ require 'maglev/cli/install_generator'
 
 RSpec.describe Maglev::CLI::InstallGenerator do
   let(:routes_file) { File.read('config/routes.rb') }
+  let(:config_file) { File.read(File.join(TMP_PATH, 'config', 'maglev.rb')) }
 
   before(:all) do
     FileUtils.remove_dir(TMP_PATH) if File.exist?(TMP_PATH)
@@ -41,9 +42,6 @@ RSpec.describe Maglev::CLI::InstallGenerator do
   end
 
   it 'copies maglev config' do
-    FileUtils.cmp(
-      File.join(described_class.source_root, 'config', 'maglev.rb'),
-      File.join(TMP_PATH, 'config', 'maglev.rb')
-    )
+    expect(config_file).to include('uploader = :active_storage')
   end
 end
