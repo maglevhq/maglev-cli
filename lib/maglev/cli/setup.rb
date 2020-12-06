@@ -17,7 +17,7 @@ module Maglev
       end
 
       def verify_uploader
-        return if @uploader ||= uploader_in_gemfile
+        return if uploader_in_gemfile
 
         abort('Please install an uploader in your Rails application.')
       end
@@ -49,11 +49,9 @@ module Maglev
       private
 
       def uploader_in_gemfile
-        File.foreach('Gemfile.lock') do |line|
+        @uploader_in_gemfile = File.foreach('Gemfile.lock') do |line|
           return 'activestorage' if line =~ /activestorage/
         end
-
-        false
       end
 
       def ask_for_parent_model
