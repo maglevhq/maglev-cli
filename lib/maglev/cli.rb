@@ -7,8 +7,6 @@ require_relative 'cli/setup'
 module Maglev
   # The main CLI entrypoint
   class CLI < Thor
-    VERSION = '0.1.0'
-
     desc 'setup', 'Run this in a Rails app folder to set up Maglev'
     def setup
       Maglev::CLI::Setup.start
