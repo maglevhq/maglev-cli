@@ -33,7 +33,7 @@ RSpec.describe Maglev::CLI do
       expect(Maglev::CLI::InstallGenerator).to receive(:start).ordered
       expect(Kernel).to receive(:system).with('rails maglev:install:migrations db:migrate').ordered
       allow(Maglev::CLI::Model::Choose).to receive(:call).and_return(model)
-      subject
+      expect { subject }.not_to raise_error
       expect(gemfile).to include("gem 'maglev-rails-engine'")
       expect(user_model_file).to include(
         <<~MODEL
