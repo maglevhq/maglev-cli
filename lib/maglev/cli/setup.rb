@@ -3,6 +3,7 @@
 require_relative 'install_generator'
 require_relative 'model/find'
 require_relative 'model/choose'
+require 'yaml'
 
 module Maglev
   class CLI < Thor
@@ -22,8 +23,17 @@ module Maglev
         abort('Please install an uploader in your Rails application.')
       end
 
+      def verify_postgres
+        config = YAML.load_file('config/database.yml')
+        return if config.all? { |_environment, v| v['adapter'] == 'postgresql' }
+
+        abort('Maglev requires a postgres database connection.')
+      end
+
       def add_dependency
-        insert_into_file 'Gemfile', "gem 'maglev-rails-engine'\n"
+        # The core line is temporary until we actually release the core gem
+        insert_into_file 'Gemfile', "gem 'maglev', github: 'maglevhq/maglev-core', branch: 'master'\n"
+        insert_into_file 'Gemfile', "gem 'maglev-pro', github: 'maglevhq/maglev-pro', branch: 'master'\n"
       end
 
       def bundle_install
