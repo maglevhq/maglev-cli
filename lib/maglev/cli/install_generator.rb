@@ -19,12 +19,12 @@ module Maglev
       desc 'Maglev has to catch all routes'
       def catch_all_routes
         inject_into_file 'config/routes.rb', before: /^end/ do
-          <<~TEXT
-            # For more information, go to https://doc.maglev.dev
-            # [MAGLEV] editor UI + preview endpoint
-            mount Maglev::Engine, at: '/maglev'
-            # [MAGLEV] CMS
-            get '(*path)', to: 'maglev/page_preview#index', defaults: { path: 'index' }
+          <<-TEXT
+  # For more information, go to https://doc.maglev.dev
+  # [MAGLEV] editor UI + preview endpoint
+  mount Maglev::Engine, at: '/maglev'
+  # [MAGLEV] CMS
+  get '(*path)', to: 'maglev/page_preview#index', defaults: { path: 'index' }
           TEXT
         end
       end
