@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['papipo@gmail.com']
 
   spec.summary       = 'Maglev command line interface.'
-  spec.description   = 'Eases setting up Maglev on existing Rails apps.'
+  spec.description   = 'Eases setting up Maglev PRO on existing Rails apps.'
   spec.homepage      = 'https://github.com/maglevhq/maglev-cli'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
@@ -27,6 +27,6 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'thor', '1.0.1'
-  spec.add_dependency 'tty-prompt', '0.22.0'
+  spec.add_dependency 'thor', '~> 1.1.0'
+  spec.add_dependency 'tty-prompt', '~> 0.23.1'
 end
