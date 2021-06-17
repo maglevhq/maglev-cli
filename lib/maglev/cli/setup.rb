@@ -31,13 +31,15 @@ module Maglev
       end
 
       def add_dependency
+        # Temporary use this branch because it solves a bug
+        insert_into_file 'Gemfile', "gem 'injectable', github: 'Papipo/injectable', branch: 'override-with-class'\n"
         # The core line is temporary until we actually release the core gem
-        insert_into_file 'Gemfile', "gem 'maglev', github: 'maglevhq/maglev-core', branch: 'master'\n"
+        insert_into_file 'Gemfile', "gem 'maglev', github: 'maglevhq/maglev-core', branch: 'master', require: false\n"
         insert_into_file 'Gemfile', "gem 'maglev-pro', github: 'maglevhq/maglev-pro', branch: 'master'\n"
       end
 
       def bundle_install
-        Bundler::CLI.start(%w[install])
+        Bundler::CLI.start(%w[update])
       end
 
       def inject_association_macro
