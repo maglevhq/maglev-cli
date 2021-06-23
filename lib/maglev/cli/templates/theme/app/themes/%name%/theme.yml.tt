@@ -1,0 +1,5 @@
+# Please, do not change the id of the theme
+id: "<%= name %>"
+name: "<%= name %>"
+
+description: "A brief description of the theme"

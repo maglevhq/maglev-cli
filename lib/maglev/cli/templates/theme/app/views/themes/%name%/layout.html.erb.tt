@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Maglev - <%= name %> theme</title>  
+</head>
+<body>
+  <%%= yield %>
+</body>
+</html>

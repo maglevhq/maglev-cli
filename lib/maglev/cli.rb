@@ -11,5 +11,11 @@ module Maglev
       require_relative 'cli/setup'
       Maglev::CLI::Setup.start
     end
+
+    desc 'theme NAME', 'Generate a maglev Theme'
+    def theme(name)
+      require_relative 'cli/theme_generator'
+      Maglev::CLI::ThemeGenerator.start([name])
+    end
   end
 end
