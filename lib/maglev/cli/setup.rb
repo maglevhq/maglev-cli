@@ -45,9 +45,9 @@ module Maglev
       def inject_association_macro
         return unless (parent_model = ask_for_parent_model)
 
-        inject_into_class(parent_model.path, parent_model.name) do
-          "  has_one_maglev_site\n"
-        end
+        inject_into_class parent_model.path, parent_model.name, <<~CODE
+          has_one :maglev_site, as: :siteable, dependent: :destroy
+        CODE
       end
 
       def install_generator
@@ -56,6 +56,7 @@ module Maglev
 
       def migrate
         Kernel.system('rails maglev:install:migrations db:migrate')
+        Kernel.system('rails maglev_pro:install:migrations db:migrate')
       end
 
       private
