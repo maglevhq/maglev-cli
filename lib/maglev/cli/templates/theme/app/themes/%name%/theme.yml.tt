@@ -2,4 +2,11 @@
 id: "<%= name %>"
 name: "<%= name %>"
 
+section_categories:
+- name: contents
+
 description: "A brief description of the theme"
+
+pages:
+- title: "Home page"
+  path:  "/index"

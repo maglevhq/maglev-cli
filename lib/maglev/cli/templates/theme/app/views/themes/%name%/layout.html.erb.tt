@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Maglev - <%= name %> theme</title>  
+  <title><%%= @site.name %></title>  
 </head>
 <body>
-  <%%= yield %>
+  <main data-maglev-dropzone>
+    <%%= raw render_maglev_sections site: @site, theme: @theme, page: @page, page_sections: @page_sections %>
+  </main>
 </body>
 </html>
