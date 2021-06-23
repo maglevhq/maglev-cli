@@ -17,5 +17,11 @@ module Maglev
       require_relative 'cli/theme_generator'
       Maglev::CLI::ThemeGenerator.start([name])
     end
+
+    desc 'section NAME', 'Generate a maglev Section'
+    def section(name)
+      require_relative 'cli/section_generator'
+      Maglev::CLI::SectionGenerator.start([name])
+    end
   end
 end
