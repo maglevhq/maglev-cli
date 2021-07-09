@@ -39,7 +39,7 @@ module Maglev
       end
 
       def bundle_install
-        Bundler::CLI.start(%w[update])
+        Bundler::CLI.start(%w[install])
       end
 
       def setup_webpacker
