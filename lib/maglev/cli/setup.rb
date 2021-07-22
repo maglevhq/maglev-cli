@@ -31,6 +31,7 @@ module Maglev
       end
 
       def add_dependency
+        return if dependency_installed?
         # Temporary use this branch because it solves a bug
         insert_into_file 'Gemfile', "gem 'injectable', github: 'Papipo/injectable', branch: 'override-with-class'\n"
         # The core line is temporary until we actually release the core gem
@@ -51,7 +52,7 @@ module Maglev
         return unless (parent_model = ask_for_parent_model)
 
         inject_into_class parent_model.path, parent_model.name, <<~CODE
-          has_one :maglev_site, as: :siteable, dependent: :destroy
+  has_one :maglev_site, as: :siteable, dependent: :destroy
         CODE
       end
 
@@ -60,7 +61,6 @@ module Maglev
       end
 
       def migrate
-        Kernel.system('rails maglev:install:migrations db:migrate')
         Kernel.system('rails maglev_pro:install:migrations db:migrate')
       end
 
@@ -85,6 +85,13 @@ module Maglev
         @uploader_in_gemfile = File.foreach('Gemfile.lock') do |line|
           return 'activestorage' if line =~ /activestorage/
         end
+      end
+
+      def dependency_installed?
+        File.foreach('Gemfile') do |line|
+          return true if line =~ /gem 'maglev',/
+        end
+        false
       end
 
       def ask_for_parent_model
