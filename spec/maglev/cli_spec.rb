@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'maglev/cli'
 
 RSpec.describe Maglev::CLI do
   it 'has a version number' do
@@ -11,7 +10,8 @@ RSpec.describe Maglev::CLI do
   describe 'setup' do
     before(:all) do
       FileUtils.remove_dir(TMP_PATH) if File.exist?(TMP_PATH)
-      FileUtils.cp_r(DUMMY_PATH, TMP_PATH)
+      FileUtils.mkdir_p(File.join(TMP_PATH, '..'))
+      FileUtils.cp_r(DUMMY_PATH, File.join(TMP_PATH, '..'))
     end
 
     after(:all) { FileUtils.remove_dir(TMP_PATH) if File.exist?(TMP_PATH) }
@@ -29,17 +29,22 @@ RSpec.describe Maglev::CLI do
     subject { Maglev::CLI.start(%w[setup]) }
 
     it 'does all needed steps' do
+      require 'thor'
+      require 'maglev/cli/setup'
+      
       expect(Bundler::CLI).to receive(:start).with(%w[install]).ordered
       expect(Maglev::CLI::InstallGenerator).to receive(:start).ordered
-      expect(Kernel).to receive(:system).with('rails maglev:install:migrations db:migrate').ordered
+      expect(Kernel).to receive(:system).with('rails webpacker:install')
+      expect(Kernel).to receive(:system).with('maglev:webpacker:compile')
+      expect(Kernel).to receive(:system).with('rails maglev_pro:install:migrations db:migrate').ordered
       allow(Maglev::CLI::Model::Choose).to receive(:call).and_return(model)
       expect { subject }.not_to raise_error
-      expect(gemfile).to include("gem 'maglev-rails-engine'")
+      expect(gemfile).to include("gem 'maglev-pro'")
       expect(user_model_file).to include(
-        <<~MODEL
-          class User < ApplicationRecord
-            has_one_maglev_site
-          end
+        <<-MODEL
+class User < ApplicationRecord
+  has_one :maglev_site, as: :siteable, dependent: :destroy
+end
         MODEL
       )
     end

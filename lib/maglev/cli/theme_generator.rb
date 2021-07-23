@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Maglev
-  class CLI
+  module CLI
     # Generates a maglev theme.
     class ThemeGenerator < Thor::Group
       include Thor::Actions

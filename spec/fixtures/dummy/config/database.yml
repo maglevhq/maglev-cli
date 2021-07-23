@@ -1,0 +1,7 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: my_maglev_pro_app_development

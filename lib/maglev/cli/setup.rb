@@ -6,7 +6,7 @@ require_relative 'model/choose'
 require 'yaml'
 
 module Maglev
-  class CLI < Thor
+  module CLI
     # CLI Setup as a Thor::Group class to improve readability
     class Setup < Thor::Group
       include Thor::Actions
@@ -51,7 +51,7 @@ module Maglev
       def inject_association_macro
         return unless (parent_model = ask_for_parent_model)
 
-        inject_into_class parent_model.path, parent_model.name, <<~CODE
+        inject_into_class parent_model.path, parent_model.name, <<-CODE
   has_one :maglev_site, as: :siteable, dependent: :destroy
         CODE
       end

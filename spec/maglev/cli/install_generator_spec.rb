@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'thor'
 require 'maglev/cli/install_generator'
 
 RSpec.describe Maglev::CLI::InstallGenerator do
   let(:routes_file) { File.read('config/routes.rb') }
-  let(:config_file) { File.read(File.join(TMP_PATH, 'config', 'maglev.rb')) }
+  let(:config_file) { File.read(File.join(TMP_PATH, 'config', 'initializers', 'maglev.rb')) }
 
   before(:all) do
     FileUtils.remove_dir(TMP_PATH) if File.exist?(TMP_PATH)
@@ -34,7 +35,7 @@ RSpec.describe Maglev::CLI::InstallGenerator do
   end
 
   it 'mounts the Maglev::Engine' do
-    expect(routes_file).to include("mount Maglev::Engine, at: '/maglev'")
+    expect(routes_file).to include("mount Maglev::Pro::Engine => '/maglev', as: :maglev")
   end
 
   it 'adds a catch-all route' do

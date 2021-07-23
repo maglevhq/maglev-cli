@@ -3,7 +3,7 @@
 require_relative '../model'
 
 module Maglev
-  class CLI
+  module CLI
     class Model
       module Find
         def self.call(application_path:)

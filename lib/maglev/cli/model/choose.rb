@@ -3,7 +3,7 @@
 require 'tty/prompt'
 
 module Maglev
-  class CLI
+  module CLI
     class Model
       # Asks the user to select a model using a TTY Prompt
       module Choose

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Maglev
-  class CLI < Thor
+  module CLI
     # Generates files needed by Maglev Engine
     class InstallGenerator < Thor::Group
       include Thor::Actions

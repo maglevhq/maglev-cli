@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Maglev
-  class CLI
+  module CLI
     class SectionGenerator < Thor::Group
       include Thor::Actions
 
