@@ -44,7 +44,6 @@ module Maglev
       end
 
       def setup_webpacker
-        Kernel.system 'rails webpacker:install'
         Kernel.system 'rails maglev:webpacker:compile'
       end
 
