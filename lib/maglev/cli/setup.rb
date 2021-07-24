@@ -45,7 +45,7 @@ module Maglev
 
       def setup_webpacker
         Kernel.system 'rails webpacker:install'
-        Kernel.system 'maglev:webpacker:compile'
+        Kernel.system 'rails maglev:webpacker:compile'
       end
 
       def inject_association_macro
