@@ -25,7 +25,7 @@ module Maglev
 
       def verify_postgres
         config = YAML.load_file('config/database.yml')
-        return if config.all? { |_environment, v| v['adapter'] == 'postgresql' }
+        return if config.all? { |_environment, v| ['postgresql', 'postgis'].include? v['adapter'] }
 
         abort('Maglev requires a postgres database connection.')
       end
