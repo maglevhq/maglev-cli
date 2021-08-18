@@ -11,6 +11,8 @@ module Maglev
     class Setup < Thor::Group
       include Thor::Actions
 
+      VALID_PG_ADAPTERS = %w(pg postgresql postgis)
+
       def verify_gemfile_lock
         return if File.file?('Gemfile.lock')
 
@@ -25,9 +27,9 @@ module Maglev
 
       def verify_postgres
         config = YAML.load_file('config/database.yml')
-        return if config.all? { |_environment, v| v['adapter'] == 'postgresql' }
+        return if config.all? { |_environment, v| VALID_PG_ADAPTERS.include?(v['adapter']) }
 
-        abort('Maglev requires a postgres database connection.')
+        abort('Maglev requires a PostgreSQL database connection.')
       end
 
       def add_dependency
@@ -51,7 +53,7 @@ module Maglev
         return unless (parent_model = ask_for_parent_model)
 
         inject_into_class parent_model.path, parent_model.name, <<-CODE
-  has_one :maglev_site, as: :siteable, dependent: :destroy
+  has_one :maglev_site, class_name: 'Maglev::Site', as: :siteable, dependent: :destroy
         CODE
       end
 

@@ -34,6 +34,11 @@ module Maglev
       def config
         directory 'config'
       end
+
+      desc 'Maglev default image placeholder'
+      def config
+        directory 'public'
+      end
     end
   end
 end

@@ -1,5 +1,5 @@
 # Please, do not change the id of the theme
-id: "<%= name %>"
+id: "<%= file_name %>"
 name: "<%= name %>"
 
 section_categories:

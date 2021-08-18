@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'active_support'
+require 'active_support/inflector'
+
 module Maglev
   module CLI
     class SectionGenerator < Thor::Group
@@ -9,10 +12,14 @@ module Maglev
       class_option :settings, type: :array, default: []
       argument :section_name, type: :string
 
-      attr_reader :theme_name, :settings, :blocks
+      attr_reader :file_name, :theme_name, :settings, :blocks
 
       def self.source_root
         File.expand_path('templates/section', __dir__)
+      end
+
+      def set_file_name
+        @file_name = section_name.underscore
       end
 
       def verify_themes_are_present
@@ -43,16 +50,12 @@ module Maglev
 
       def extract_section_settings
         # build section settings only
-        sections = options['settings'].map do |raw_setting|
+        options['settings'].map do |raw_setting|
           next if raw_setting.starts_with?('block:') # block setting
 
           id, type = raw_setting.split(':')
           SectionSetting.new(id, type)
-        end.compact
-
-        return sections unless sections.empty?
-
-        default_section_settings
+        end.compact.presence || default_section_settings
       end
 
       def extract_blocks
@@ -62,9 +65,9 @@ module Maglev
 
           _, block_type, id, type = raw_setting.split(':')
           BlockSetting.new(block_type, id, type)
-        end.compact
+        end.compact.presence || []
 
-        blocks = default_block_settings if Array(blocks).empty?
+        blocks = default_block_settings if blocks.blank?
 
         # group them by block types
         blocks.group_by(&:block_type)
@@ -73,14 +76,14 @@ module Maglev
       def default_section_settings
         [
           SectionSetting.new('title', 'text', 'My awesome title'),
-          SectionSetting.new('image', 'image_picker', 'An image')
+          SectionSetting.new('image', 'image', 'An image')
         ]
       end
 
       def default_block_settings
         [
           BlockSetting.new('list_item', 'title', 'text', 'Item title'),
-          BlockSetting.new('list_item', 'image', 'image_picker', 'Item image')
+          BlockSetting.new('list_item', 'image', 'image', 'Item image')
         ]
       end
 
@@ -96,10 +99,12 @@ module Maglev
         def default
           case type
           when 'text' then label
-          when 'image_picker' then '"/samples/images/default.svg"' # TODO: replace by a real image
+          when 'image' then '"/themes/image-placeholder.jpg"'
           when 'checkbox' then true
+          when 'link' then '"#"'
+          when 'color' then '#E5E7EB'
           when 'radio', 'select' then 'option_1'
-          when 'url' then '"#"'
+
           end
         end
 
