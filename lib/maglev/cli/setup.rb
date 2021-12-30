@@ -57,7 +57,7 @@ module Maglev
         CODE
       end
 
-      def install_generator
+      def run_install_generator
         Maglev::CLI::InstallGenerator.start
       end
 

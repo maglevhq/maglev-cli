@@ -2,6 +2,7 @@
 
 require 'spec_helper'
 require 'thor'
+require 'fileutils'
 require 'maglev/cli/install_generator'
 
 RSpec.describe Maglev::CLI::InstallGenerator do
@@ -22,9 +23,7 @@ RSpec.describe Maglev::CLI::InstallGenerator do
     end
   end
 
-  after(:all) do
-    FileUtils.remove_dir(TMP_PATH) if File.exist?(TMP_PATH)
-  end
+  after(:all) { FileUtils.remove_dir(TMP_PATH) if File.exist?(TMP_PATH) }
 
   it 'generates an app/themes directory' do
     expect(File.file?('app/themes/.keep')).to be true

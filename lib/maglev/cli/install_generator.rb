@@ -30,13 +30,13 @@ module Maglev
         end
       end
 
-      desc 'Maglev config lives at config/initialisers/maglev.rb'
-      def config
+      desc 'Maglev config lives at config/initializers/maglev.rb'
+      def copy_config_dir
         directory 'config'
       end
 
       desc 'Maglev default image placeholder'
-      def config
+      def copy_public_dir
         directory 'public'
       end
     end

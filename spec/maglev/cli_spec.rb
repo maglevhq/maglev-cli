@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'fileutils'
 
 RSpec.describe Maglev::CLI do
   it 'has a version number' do
@@ -34,8 +35,7 @@ RSpec.describe Maglev::CLI do
       
       expect(Bundler::CLI).to receive(:start).with(%w[install]).ordered
       expect(Maglev::CLI::InstallGenerator).to receive(:start).ordered
-      expect(Kernel).to receive(:system).with('rails webpacker:install')
-      expect(Kernel).to receive(:system).with('maglev:webpacker:compile')
+      expect(Kernel).to receive(:system).with('rails maglev:webpacker:compile')
       expect(Kernel).to receive(:system).with('rails maglev_pro:install:migrations db:migrate').ordered
       allow(Maglev::CLI::Model::Choose).to receive(:call).and_return(model)
       expect { subject }.not_to raise_error
@@ -43,7 +43,7 @@ RSpec.describe Maglev::CLI do
       expect(user_model_file).to include(
         <<-MODEL
 class User < ApplicationRecord
-  has_one :maglev_site, as: :siteable, dependent: :destroy
+  has_one :maglev_site, class_name: 'Maglev::Site', as: :siteable, dependent: :destroy
 end
         MODEL
       )
