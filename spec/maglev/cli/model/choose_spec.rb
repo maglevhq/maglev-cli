@@ -11,7 +11,7 @@ RSpec.describe Maglev::CLI::Model::Choose do
   let(:choices) { [{ name: chosen_model.name, value: chosen_model }] }
 
   before do
-    allow(prompt).to receive(:select).with('Which model will have maglev sites?', choices).and_return chosen_model
+    allow(prompt).to receive(:select).with('Which model will own a Maglev site?', choices).and_return chosen_model
   end
 
   subject { described_class.call(models: [chosen_model], prompt: prompt) }

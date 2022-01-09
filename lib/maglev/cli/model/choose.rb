@@ -8,7 +8,7 @@ module Maglev
       # Asks the user to select a model using a TTY Prompt
       module Choose
         def self.call(prompt: TTY::Prompt.new, models:)
-          prompt.select('Which model will have maglev sites?', choices(models))
+          prompt.select('Which model will own a Maglev site?', choices(models))
         end
 
         def self.choices(models)

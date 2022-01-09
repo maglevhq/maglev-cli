@@ -25,7 +25,7 @@ module Maglev
   mount Maglev::Pro::Engine => '/maglev', as: :maglev
   
   # [MAGLEV] CMS
-  get '(*path)', to: 'maglev/page_preview#index', defaults: { path: 'index' }
+  get '(*path)', to: 'maglev/page_preview#index', defaults: { path: 'index' }, constraints: Maglev::PreviewConstraint.new
           TEXT
         end
       end
