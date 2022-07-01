@@ -1,5 +1,5 @@
 # Name of the section displayed in the editor UI
-name: "<%= section_name %>"
+name: "<%= file_name %>"
 
 # Category of the section in the editor UI (header, features, testimonials, ...etc)
 category: <%= options['category'] %>
@@ -8,8 +8,14 @@ category: <%= options['category'] %>
 # To enable this behavior, uncomment the following statement
 # site_scoped: true
 
+# Display or not the button to insert a new section after this one
+# insert_button: false
+
+# Insert this section at the top or the bottom of the page (default: nil)
+# insert_at: top 
+
 # Definition of the settings:
-# A setting type can be one of the following values: text, image, link, checkbox and color.
+# A setting type can be one of the following values: text, image, link, collection_item, checkbox, color and icon.
 # Please visit: https://docs.maglev.dev/concepts/setting for more explanation.
 settings:
 <%- settings.each do |setting| -%>

@@ -2,17 +2,18 @@
 
 require 'active_support'
 require 'active_support/inflector'
+require 'yaml'
 
 module Maglev
   module CLI
     class SectionGenerator < Thor::Group
       include Thor::Actions
 
-      class_option :category, type: :string, default: 'contents'
+      class_option :category, type: :string, default: nil
       class_option :settings, type: :array, default: []
       argument :section_name, type: :string
 
-      attr_reader :file_name, :theme_name, :settings, :blocks
+      attr_reader :file_name, :theme_name, :category, :settings, :blocks
 
       def self.source_root
         File.expand_path('templates/section', __dir__)
@@ -31,6 +32,13 @@ module Maglev
         @theme_name = ask 'Please choose a theme', limited_to: themes, default: themes.first
       end
 
+      def select_category
+        @category = options['category']
+        return if @category.present?
+        say 'You have to select a category', :blue
+        @category = ask 'Please choose a category', limited_to: categories, default: categories.first
+      end
+
       def build_settings
         @settings = extract_section_settings
         @blocks = extract_blocks
@@ -46,6 +54,13 @@ module Maglev
         @themes ||= Dir.chdir('app/themes') do
           Dir.glob('*').select { |f| File.directory? f }
         end
+      end
+
+      def categories
+        YAML.load_file("./app/themes/#{theme_name}/theme.yml")['section_categories']
+        .map do |category|
+          category['id'] || category['name'].parameterize(separator: '_')
+        end        
       end
 
       def extract_section_settings
