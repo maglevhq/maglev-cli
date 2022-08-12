@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>maglev-cli</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <link rel="stylesheet" href="/assets/tailwind-bfdeb907cccadcc2a6fbc1ed1bd8824ab4e02e8b5be071d44b26ca4276249d15.css?1660323155" data-turbo-track="reload" />
+<link rel="stylesheet" href="/assets/inter-font-104a40c2215dd1af8cb06becb0a7e1e5aab2a526c0cebc804f1e5ec6d9647971.css?1660323155" data-turbo-track="reload" />
+  <link rel="stylesheet" href="/maglev-basic-theme-b95862c00fb9462f37e0f794a8a27fcbe5ad125ca3cc6e3270f02f7ef9fb9dd5.css?1660323155" data-turbo-track="reload" />
+
+  <script type="importmap" data-turbo-track="reload">{
+  "imports": {
+    "application": "/assets/application-37f365cbecf1fa2810a8303f4b6571676fa1f9c56c248528bc14ddb857531b95.js?1660323155",
+    "theme-basic": "/assets/theme-basic-33963989fdc8c0cb38900591e3ec9dbf12c1e6a7bf1b2399b32ec88f5f2fd31c.js?1660323155",
+    "@hotwired/turbo-rails": "/assets/turbo.min-fc010767937dcee88f9211d0459bdcb0f55f2ce77e1654a382c42ec5fb1b0a37.js?1660323155",
+    "@hotwired/stimulus": "https://ga.jspm.io/npm:@hotwired/stimulus@3.0.1/dist/stimulus.js",
+    "@hotwired/stimulus-loading": "/assets/stimulus-loading-685d40a0b68f785d3cdbab1c0f3575320497462e335c4a63b8de40a355d883c0.js?1660323155",
+    "stimulus-transition": "https://ga.jspm.io/npm:stimulus-transition@1.1.2/dist/index.js",
+    "stimulus-use": "https://ga.jspm.io/npm:stimulus-use@0.41.0/dist/index.js",
+    "stimulus": "https://ga.jspm.io/npm:stimulus@3.0.1/dist/stimulus.js",
+    "hotkeys-js": "https://ga.jspm.io/npm:hotkeys-js@3.8.7/dist/hotkeys.esm.js",
+    "controllers/application": "/assets/controllers/application-63c2bbc4a76c85bbfce1cd9d402dfb08fc8214638b7631aa1d37ca6af596b53a.js?1660323155",
+    "controllers/constrained_selects_controller": "/assets/controllers/constrained_selects_controller-9686c090f2d2d6c52a3b41831298307d43282a9a768e55ae729d72a7a8f68c1b.js?1660323155",
+    "controllers/dropdown_controller": "/assets/controllers/dropdown_controller-4fbc8b7fdc62fa101491f4a3cb41bf3e94dba5518f0b940652639757bdf5cddc.js?1660323155",
+    "controllers/github_app_install_button_controller": "/assets/controllers/github_app_install_button_controller-a966e3ce65a5154ff04e116ff7ae5aae2e02dda5d75d5900e25eff236188d52c.js?1660323155",
+    "controllers/hello_controller": "/assets/controllers/hello_controller-549135e8e7c683a538c3d6d517339ba470fcfb79d62f738a0a089ba41851a554.js?1660323155",
+    "controllers": "/assets/controllers/index-2db729dddcc5b979110e98de4b6720f83f91a123172e87281d5a58410fc43806.js?1660323155",
+    "controllers/reveal_controller": "/assets/controllers/reveal_controller-be27656e13b0eaf8ce6ddcf0df523251baa9f1bb597faca1671ca9df17966711.js?1660323155",
+    "controllers/site/custom_domain_controller": "/assets/controllers/site/custom_domain_controller-9d732dc70c98a896663b1fb770f7cdd1279899ae9ad1c8c85e8b08a33a7ed67f.js?1660323155",
+    "controllers/themes/basic/basic_nav_01_controller": "/assets/controllers/themes/basic/basic_nav_01_controller-10085e1312dcadd45de59d4be18b7f2c9def26f49dd6df19dcec962fdbf32982.js?1660323155",
+    "controllers/themes/basic/basic_tabs_controller": "/assets/controllers/themes/basic/basic_tabs_controller-e126b170ff319ba1f54d61dd4fefd355e5660bf04dca126942e375c9fbbe1dd9.js?1660323155",
+    "controllers/themes/shared/reveal_controller": "/assets/controllers/themes/shared/reveal_controller-ee3b157ef460ab770a73353b33b784be9c5e5856c9b071b3d2b415cb48998636.js?1660323155",
+    "controllers/toggle_controller": "/assets/controllers/toggle_controller-71928df289fbfd9d766b04d476ce7ccf31e7624c8378ce5c3f54e809f8b51b72.js?1660323155"
+  }
+}</script>
+<link rel="modulepreload" href="/assets/application-37f365cbecf1fa2810a8303f4b6571676fa1f9c56c248528bc14ddb857531b95.js?1660323155">
+<link rel="modulepreload" href="/assets/theme-basic-33963989fdc8c0cb38900591e3ec9dbf12c1e6a7bf1b2399b32ec88f5f2fd31c.js?1660323155">
+<link rel="modulepreload" href="/assets/turbo.min-fc010767937dcee88f9211d0459bdcb0f55f2ce77e1654a382c42ec5fb1b0a37.js?1660323155">
+<link rel="modulepreload" href="/assets/stimulus-loading-685d40a0b68f785d3cdbab1c0f3575320497462e335c4a63b8de40a355d883c0.js?1660323155">
+<script src="/assets/es-module-shims.min-d3c7e98ebc48973b216979473272db4316fb1c285a336ff9615bc3fcb4c5a8bb.js?1660323155" async="async" data-turbo-track="reload"></script>
+<script type="module">import "theme-basic"</script>
+
+  <style id="maglev-style">
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+    html {
+      font-size: var(--basic-theme-default-font-size);
+    }
+    
+    html > body {
+      font-family: "Montserrat", "Arial", "sans-serif";
+    }
+
+    :root {
+      --basic-theme-title-font: "Montserrat", "Arial", "sans-serif";
+      --basic-theme-logo-font: "Montserrat", "Arial", "sans-serif";
+      --basic-theme-default-font-size: 16px;
+      
+      --basic-theme-primary-color: #12285C;
+      --basic-theme-primary-color-non-hex: 18, 40, 92;
+      --basic-theme-primary-color-non-hex-no-comma: 18 40 92;
+
+      --basic-theme-transparent: transparent;
+      --basic-theme-color-black: #000000;
+      --basic-theme-color-zinc: #3f3f46;
+      --basic-theme-color-red: #B70A1E;
+      --basic-theme-color-orange: #c2410c;
+      --basic-theme-color-beige: #B9A58F;
+      --basic-theme-color-green: #15803d;
+      --basic-theme-color-teal: #0f766e;
+      --basic-theme-color-cyan: #0369a1;
+      --basic-theme-color-dark-blue: #12285C;
+      --basic-theme-color-blue: #12285C;
+      --basic-theme-color-violet: #6d28d9;
+      --basic-theme-color-fuchsia: #a21caf;
+    }
+  </style>
+</head>
+<body class="bg-white">
+  <main data-maglev-dropzone>
+    <div class="border-t border-gray-100 py-8 md:py-20" style="background-color: var(--basic-theme-transparent)" data-maglev-section-id="Fo7RxGP1">  
+  <div class="container mx-auto px-6 flex flex-col justify-between items-center ">
+    <h1 class="text-4xl md:text-5xl font-title font-bold text-center basic-hero-title leading-relaxed md:leading-relaxed">
+      <span data-maglev-id="Fo7RxGP1.title"><strong>Hello</strong></span>
+    </h1>
+    
+    <div data-maglev-id="Fo7RxGP1.intro" class="text-center leading-relaxed mt-10 max-w-2xl lg:mx-auto prose text-black prose-a:text-basic-theme-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam cursus nunc vehicula est facilisis, vel malesuada dui tempor. Proin ut blandit lorem, at ullamcorper dui.</div>
+    
+    <div
+      class="flex flex-col md:flex-row md:space-x-14 space-y-5 md:space-y-0 mt-10 w-full justify-center"
+    >
+      <a data-maglev-id="Fo7RxGP1.primary_cta" class="
+          shrink-0
+          flex items-center justify-center
+          bg-basic-theme-primary
+          rounded-lg
+          py-3
+          md:py-4
+          px-10
+          w-full
+          md:w-auto
+          text-center
+          text-white
+          font-bold
+          transform          
+          hover:-translate-y-0.5
+          transition-all" href="/preview"><span data-maglev-id="Fo7RxGP1.primary_cta.text">Call to action #1</span></a>
+
+      <a data-maglev-id="Fo7RxGP1.secondary_cta" class="
+          shrink-0
+          flex items-center justify-center
+          font-bold
+          bg-transparent
+          rounded-lg
+          border border-basic-theme-primary
+          py-3
+          md:py-4
+          px-10
+          w-full
+          md:w-auto
+          transform
+          text-basic-theme-primary text-opacity-100
+          hover:-translate-y-0.5
+          transition-all" href="/preview"><span data-maglev-id="Fo7RxGP1.secondary_cta.text">Call to action #2</span></a>
+    </div>
+  </div>  
+</div>
+  </main>
+</body>
+</html>
