@@ -19,10 +19,14 @@ module Maglev
         Maglev::CLI::ThemeGenerator.start([name])
       end
 
-      desc 'section NAME', 'Generate a maglev Section'
-      def section(name)
+      desc 'section NAME [GENERATOR_OPTIONS]', 'Generate a maglev Section'
+      def section(name, *generator_options)
         require_relative './section_generator'
-        Maglev::CLI::SectionGenerator.start([name])
+        Maglev::CLI::SectionGenerator.start([name, *generator_options])
+      end
+
+      def self.exit_on_failure?
+        true
       end
     end
   end

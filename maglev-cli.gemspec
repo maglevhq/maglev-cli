@@ -5,8 +5,8 @@ require_relative 'lib/maglev/cli/version'
 Gem::Specification.new do |spec|
   spec.name          = 'maglev-cli'
   spec.version       = Maglev::CLI::VERSION
-  spec.authors       = ['Rodrigo Alvarez']
-  spec.email         = ['papipo@gmail.com']
+  spec.authors       = ['Rodrigo Alvarez', 'Didier Lafforgue']
+  spec.email         = ['didier@nocoffee.fr']
 
   spec.summary       = 'Maglev command line interface.'
   spec.description   = 'Eases setting up Maglev PRO on existing Rails apps.'

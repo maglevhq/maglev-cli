@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Force THOR to raise an error instead of doing a system exit
+ENV['THOR_DEBUG'] = '1'
+
 require 'bundler/setup'
 require 'maglev/cli'
 

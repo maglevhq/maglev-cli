@@ -2,6 +2,7 @@
 
 require 'active_support'
 require 'active_support/inflector'
+require 'active_support/core_ext/string'
 require 'yaml'
 
 module Maglev
@@ -9,6 +10,7 @@ module Maglev
     class SectionGenerator < Thor::Group
       include Thor::Actions
 
+      class_option :theme, type: :string, default: nil
       class_option :category, type: :string, default: nil
       class_option :settings, type: :array, default: []
       argument :section_name, type: :string
@@ -28,8 +30,11 @@ module Maglev
       end
 
       def select_theme
-        say 'You have to select a theme', :blue
-        @theme_name = ask 'Please choose a theme', limited_to: themes, default: themes.first
+        @theme_name = options['theme']
+        if @theme_name.blank?
+          say 'You have to select a theme', :blue
+          @theme_name = ask 'Please choose a theme', limited_to: themes, default: themes.first
+        end
       end
 
       def select_category
