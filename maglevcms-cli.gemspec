@@ -3,9 +3,9 @@
 require_relative 'lib/maglev/cli/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'maglev-cli'
+  spec.name          = 'maglevcms-cli'
   spec.version       = Maglev::CLI::VERSION
-  spec.authors       = ['Rodrigo Alvarez', 'Didier Lafforgue']
+  spec.authors       = ['Didier Lafforgue']
   spec.email         = ['didier@nocoffee.fr']
 
   spec.summary       = 'Maglev command line interface.'
@@ -27,6 +27,6 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'thor', '~> 1.1.0'
+  spec.add_dependency 'thor', '~> 1'
   spec.add_dependency 'tty-prompt', '~> 0.23.1'
 end

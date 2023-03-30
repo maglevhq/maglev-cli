@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    maglev-cli (0.1.0)
-      thor (~> 1.1.0)
+    maglevcms-cli (0.1.0)
+      thor (~> 1)
       tty-prompt (~> 0.23.1)
 
 GEM
@@ -115,11 +115,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  maglev-cli!
+  maglevcms-cli!
   railties (~> 6.0.3)
   rake (~> 12.0)
   rspec (~> 3.0)
   rubocop (~> 0.91)
 
 BUNDLED WITH
-   2.2.17
+   2.3.10
