@@ -34,8 +34,6 @@ module Maglev
 
       def add_dependency
         return if dependency_installed?
-        # Temporary use this branch because it solves a bug
-        insert_into_file 'Gemfile', "gem 'injectable', github: 'Papipo/injectable', branch: 'override-with-class'\n"
         # The core line is temporary until we actually release the core gem
         insert_into_file 'Gemfile', "gem 'maglevcms', github: 'maglevhq/maglev-core', branch: 'master', require: false\n"
         insert_into_file 'Gemfile', "gem 'maglev-pro', github: 'maglevhq/maglev-pro', branch: 'master', require: 'maglev/pro'\n"

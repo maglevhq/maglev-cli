@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maglevcms-cli (0.1.0)
+    maglevcms-cli (0.2.0)
       thor (~> 1)
       tty-prompt (~> 0.23.1)
 
